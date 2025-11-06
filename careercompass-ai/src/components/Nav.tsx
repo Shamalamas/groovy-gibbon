@@ -1,28 +1,29 @@
-import { Github, Moon, Sun, UsersRound } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Menu } from "lucide-react";
 
-export default function Nav({ onTeam }: { onTeam: () => void }) {
-  const [dark, setDark] = useState(true);
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', dark);
-  }, [dark]);
+type Props = {
+  onMenu: () => void;
+};
 
+export default function Nav({ onMenu }: Props) {
   return (
-    <nav className="sticky top-0 z-40 backdrop-blur bg-base-900/70 border-b border-white/10">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <span className="gradient-text font-medium">CV Ranking System</span>
+    <header className="sticky top-0 z-30 border-b border-white/10 backdrop-blur-xl bg-base-900/70">
+      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <button onClick={onTeam} className="glass px-3 py-2 rounded-xl text-sm flex items-center gap-2">
-            <UsersRound className="h-4 w-4" /> Team
+          <button
+            aria-label="Open menu"
+            onClick={onMenu}
+            className="rounded-xl p-2 hover:bg-white/5 border border-white/10"
+          >
+            <Menu className="h-4 w-4" />
           </button>
-          <a className="glass p-2 rounded-xl" href="https://github.com/" target="_blank" rel="noreferrer">
-            <Github className="h-5 w-5" />
-          </a>
-          <button className="glass p-2 rounded-xl" onClick={() => setDark(d => !d)}>
-            {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </button>
+          <div className="font-semibold gradient-text">CareerCompass AI</div>
+        </div>
+
+        {/* Right side kept clean (GitHub removed) */}
+        <div className="text-xs text-white/50 hidden sm:block">
+          ✍️ CV Ranking System
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
